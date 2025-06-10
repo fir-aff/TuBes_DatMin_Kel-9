@@ -196,10 +196,11 @@ elif menu == "Prediction Tool":
     category_input = st.selectbox("Pilih Kategori Produk:", df['Category'].unique())
 
     input_enc = le_category.transform([category_input]).reshape(-1, 1)
+    input_reshaped = input_enc.reshape(-1, 1)
     model, _, _, _, _ = train_model(df_clean)
 
-    pred = model.predict(input_enc)[0]
-    prob = model.predict_proba(input_enc)[0]
+    pred = model.predict(input_reshaped)[0]
+    prob = model.predict_proba(input_reshaped)[0]
 
     pred_label = le_location.inverse_transform([pred])[0]
 
